@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0a0a0a" />
   <meta name="description" content="A 100-day daily AI building challenge. 100 prompts, 100 builds, shipped publicly." />
   <meta property="og:title" content="vibe100 — 100-day AI building challenge" />
   <meta property="og:description" content="A daily building challenge. 100 prompts, 100 builds, shipped publicly." />
@@ -174,9 +175,8 @@
 
     .tw-cursor {
       display: inline-block;
-      width: 1px;
+      width: 0;
       height: 14px;
-      background: #aaa;
       border-right: 2px solid #aaa;
       vertical-align: middle;
       margin-left: 1px;
@@ -221,7 +221,7 @@
 
     .email-input::placeholder { color: #444; }
 
-    .email-input:focus { border-color: #555; }
+    .email-input:focus { border-color: #C4773A; }
 
     .submit-btn {
       font-family: 'Syne', sans-serif;
@@ -438,6 +438,7 @@
           if (charIndex === 0) {
             isDeleting = false;
             current = (current + 1) % sentences.length;
+            charIndex = 0;
             setTimeout(tick, 300);
             return;
           }
