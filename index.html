@@ -180,6 +180,84 @@
       0%, 100% { opacity: 1; }
       50%       { opacity: 0; }
     }
+
+    .form-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      max-width: 500px;
+    }
+
+    .email-form {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .input-row {
+      display: flex;
+    }
+
+    .email-input {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      background: #111;
+      border: 1px solid #333;
+      border-right: none;
+      border-radius: 6px 0 0 6px;
+      color: #ccc;
+      padding: 13px 16px;
+      flex: 1;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .email-input::placeholder { color: #444; }
+
+    .email-input:focus { border-color: #555; }
+
+    .submit-btn {
+      font-family: 'Syne', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      background: #C4773A;
+      color: #0a0a0a;
+      border: none;
+      border-radius: 0 6px 6px 0;
+      padding: 13px 22px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.15s;
+    }
+
+    .submit-btn:hover { background: #d4843f; }
+    .submit-btn:disabled { background: #7a4a23; cursor: not-allowed; }
+
+    .fine-print {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      color: #444;
+      letter-spacing: 0.04em;
+    }
+
+    .form-error {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      color: #ff6b6b;
+      min-height: 16px;
+    }
+
+    .success-msg {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      color: #C4773A;
+      border: 1px solid rgba(196, 119, 58, 0.2);
+      background: rgba(196, 119, 58, 0.04);
+      border-radius: 6px;
+      padding: 13px 16px;
+      letter-spacing: 0.02em;
+    }
   </style>
 </head>
 <body>
@@ -212,6 +290,29 @@
       <div class="typewriter-row">
         <span class="tw-arrow">›</span>
         <span class="tw-text" id="tw-text"></span><span class="tw-cursor"></span>
+      </div>
+
+      <!-- Email form -->
+      <div class="form-wrap" id="form-wrap">
+        <form class="email-form" id="email-form" novalidate>
+          <div class="input-row">
+            <input
+              type="email"
+              id="email-input"
+              class="email-input"
+              placeholder="Enter your email to receive daily prompts"
+              required
+              autocomplete="email"
+            />
+            <button type="submit" class="submit-btn" id="submit-btn">Join Vibe100</button>
+          </div>
+          <p class="fine-print">No spam. No data sharing. Just build prompts.</p>
+          <p class="form-error" id="form-error" aria-live="polite"></p>
+        </form>
+
+        <div class="success-msg" id="success-msg" hidden>
+          You're in. Day 1 prompt is on its way. 🚀
+        </div>
       </div>
     </div>
   </main>
@@ -255,6 +356,48 @@
       }
 
       tick();
+    }());
+
+    (function () {
+      const KIT_ENDPOINT = 'https://app.convertkit.com/forms/9259428/subscriptions';
+
+      const form = document.getElementById('email-form');
+      const input = document.getElementById('email-input');
+      const btn = document.getElementById('submit-btn');
+      const errorEl = document.getElementById('form-error');
+      const successEl = document.getElementById('success-msg');
+
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        errorEl.textContent = '';
+
+        const email = input.value.trim();
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          errorEl.textContent = 'Please enter a valid email address.';
+          input.focus();
+          return;
+        }
+
+        btn.disabled = true;
+        btn.textContent = 'Joining...';
+
+        try {
+          const res = await fetch(KIT_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email_address: email })
+          });
+
+          if (!res.ok) throw new Error('Kit API returned ' + res.status);
+
+          form.hidden = true;
+          successEl.hidden = false;
+        } catch (err) {
+          errorEl.textContent = 'Something went wrong. Please try again.';
+          btn.disabled = false;
+          btn.textContent = 'Join Vibe100';
+        }
+      });
     }());
   </script>
 </body>
