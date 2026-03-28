@@ -35,19 +35,26 @@
     }
 
     main {
-      min-height: 100vh;
+      height: 100vh;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 60px 24px;
+      flex-direction: column;
+      padding: 32px 5vw;
     }
 
     .container {
       position: relative;
       width: 100%;
-      max-width: 600px;
+      max-width: 1000px;
       display: flex;
       flex-direction: column;
+      flex: 1;
+    }
+
+    .content-mid {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       gap: 20px;
     }
 
@@ -92,10 +99,10 @@
 
     .hero-title {
       font-family: 'Syne', sans-serif;
-      font-size: clamp(64px, 12vw, 96px);
+      font-size: clamp(72px, 14vw, 160px);
       font-weight: 800;
       line-height: 1;
-      letter-spacing: -3px;
+      letter-spacing: -4px;
       display: inline-block;
       position: relative;
       animation: glitch-main 4s infinite;
@@ -111,9 +118,9 @@
       top: 0;
       left: 0;
       font-family: 'Syne', sans-serif;
-      font-size: clamp(64px, 12vw, 96px);
+      font-size: clamp(72px, 14vw, 160px);
       font-weight: 800;
-      letter-spacing: -3px;
+      letter-spacing: -4px;
       line-height: 1;
     }
 
@@ -151,10 +158,10 @@
 
     .subtext {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 13px;
+      font-size: 14px;
       color: #777;
       line-height: 1.7;
-      max-width: 480px;
+      max-width: 560px;
     }
 
     .accent { color: #C4773A; }
@@ -192,7 +199,7 @@
       display: flex;
       flex-direction: column;
       gap: 0;
-      max-width: 500px;
+      max-width: 560px;
     }
 
     .email-form {
@@ -310,14 +317,18 @@
     }
 
     @media (max-width: 480px) {
+      main {
+        padding: 24px 6vw;
+      }
+
       .hero-title {
-        font-size: 56px;
+        font-size: clamp(56px, 18vw, 80px);
         letter-spacing: -2px;
       }
 
       .hero-title::before,
       .hero-title::after {
-        font-size: 56px;
+        font-size: clamp(56px, 18vw, 80px);
         letter-spacing: -2px;
       }
 
@@ -343,49 +354,54 @@
         <span class="term-label">vibe100.co — session active</span>
       </div>
 
-      <!-- Badge -->
-      <div class="badge">// 100-day AI building challenge</div>
+      <!-- Middle content -->
+      <div class="content-mid">
 
-      <!-- Hero title -->
-      <h1 class="hero-title">
-        <span class="vibe">vibe</span><span class="hundred">100</span>
-      </h1>
+        <!-- Badge -->
+        <div class="badge">// 100-day AI building challenge</div>
 
-      <!-- Subtext -->
-      <p class="subtext">
-        A daily building challenge.
-        <span class="accent">100 prompts, 100 builds,</span>
-        shipped publicly.
-      </p>
+        <!-- Hero title -->
+        <h1 class="hero-title">
+          <span class="vibe">vibe</span><span class="hundred">100</span>
+        </h1>
 
-      <!-- Typewriter row -->
-      <div class="typewriter-row">
-        <span class="tw-arrow">›</span>
-        <span class="tw-text" id="tw-text"></span><span class="tw-cursor"></span>
-      </div>
+        <!-- Subtext -->
+        <p class="subtext">
+          A daily building challenge.
+          <span class="accent">100 prompts, 100 builds,</span>
+          shipped publicly.
+        </p>
 
-      <!-- Email form -->
-      <div class="form-wrap" id="form-wrap">
-        <form class="email-form" id="email-form" novalidate>
-          <div class="input-row">
-            <input
-              type="email"
-              id="email-input"
-              class="email-input"
-              placeholder="Enter your email to receive daily prompts"
-              required
-              autocomplete="email"
-            />
-            <button type="submit" class="submit-btn" id="submit-btn">Join Vibe100</button>
-          </div>
-          <p class="fine-print">No spam. No data sharing. Just build prompts.</p>
-          <p class="form-error" id="form-error" aria-live="polite"></p>
-        </form>
-
-        <div class="success-msg" id="success-msg" hidden>
-          You're in. Day 1 prompt is on its way. 🚀
+        <!-- Typewriter row -->
+        <div class="typewriter-row">
+          <span class="tw-arrow">›</span>
+          <span class="tw-text" id="tw-text"></span><span class="tw-cursor"></span>
         </div>
-      </div>
+
+        <!-- Email form -->
+        <div class="form-wrap" id="form-wrap">
+          <form class="email-form" id="email-form" novalidate>
+            <div class="input-row">
+              <input
+                type="email"
+                id="email-input"
+                class="email-input"
+                placeholder="Enter your email to receive daily prompts"
+                required
+                autocomplete="email"
+              />
+              <button type="submit" class="submit-btn" id="submit-btn">Join Vibe100</button>
+            </div>
+            <p class="fine-print">No spam. No data sharing. Just build prompts.</p>
+            <p class="form-error" id="form-error" aria-live="polite"></p>
+          </form>
+
+          <div class="success-msg" id="success-msg" hidden>
+            You're in. Day 1 prompt is on its way. 🚀
+          </div>
+        </div>
+
+      </div><!-- /content-mid -->
 
       <!-- Stats row -->
       <div class="stats-row">
