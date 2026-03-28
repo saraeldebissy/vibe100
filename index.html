@@ -4,6 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="A 100-day daily AI building challenge. 100 prompts, 100 builds, shipped publicly." />
+  <meta property="og:title" content="vibe100 — 100-day AI building challenge" />
+  <meta property="og:description" content="A daily building challenge. 100 prompts, 100 builds, shipped publicly." />
+  <meta property="og:url" content="https://vibe100.co" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="vibe100 — 100-day AI building challenge" />
+  <meta name="twitter:description" content="A daily building challenge. 100 prompts, 100 builds, shipped publicly." />
   <title>vibe100 — 100-day AI building challenge</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -258,6 +265,71 @@
       padding: 13px 16px;
       letter-spacing: 0.02em;
     }
+
+    .stats-row {
+      display: flex;
+      gap: 32px;
+      padding-top: 20px;
+      border-top: 1px solid #1a1a1a;
+    }
+
+    .stat {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #555;
+    }
+
+    .scanlines {
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 3px,
+        rgba(0, 0, 0, 0.06) 3px,
+        rgba(0, 0, 0, 0.06) 4px
+      );
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 56px;
+        letter-spacing: -2px;
+      }
+
+      .hero-title::before,
+      .hero-title::after {
+        font-size: 56px;
+        letter-spacing: -2px;
+      }
+
+      .submit-btn {
+        padding: 13px 14px;
+        font-size: 12px;
+      }
+
+      .stats-row {
+        gap: 20px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -314,7 +386,26 @@
           You're in. Day 1 prompt is on its way. 🚀
         </div>
       </div>
+
+      <!-- Stats row -->
+      <div class="stats-row">
+        <div class="stat">
+          <span class="stat-num">100</span>
+          <span class="stat-label">days</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">1/day</span>
+          <span class="stat-label">build</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">∞</span>
+          <span class="stat-label">shipped</span>
+        </div>
+      </div>
     </div>
+
+    <!-- Scanline overlay -->
+    <div class="scanlines" aria-hidden="true"></div>
   </main>
   <script>
     (function () {
