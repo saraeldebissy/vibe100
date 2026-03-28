@@ -150,6 +150,36 @@
     }
 
     .accent { color: #C4773A; }
+
+    .typewriter-row {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      color: #555;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 20px;
+    }
+
+    .tw-arrow { color: #C4773A; flex-shrink: 0; }
+
+    .tw-text { color: #aaa; }
+
+    .tw-cursor {
+      display: inline-block;
+      width: 1px;
+      height: 14px;
+      background: #aaa;
+      border-right: 2px solid #aaa;
+      vertical-align: middle;
+      margin-left: 1px;
+      animation: cursor-blink 1s step-end infinite;
+    }
+
+    @keyframes cursor-blink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0; }
+    }
   </style>
 </head>
 <body>
@@ -177,10 +207,55 @@
         <span class="accent">100 prompts, 100 builds,</span>
         shipped publicly.
       </p>
+
+      <!-- Typewriter row -->
+      <div class="typewriter-row">
+        <span class="tw-arrow">›</span>
+        <span class="tw-text" id="tw-text"></span><span class="tw-cursor"></span>
+      </div>
     </div>
   </main>
   <script>
-    // scripts go here
+    (function () {
+      const sentences = [
+        "The best way to go from AI-curious to AI-native.",
+        "Join and receive a daily prompt every day.",
+        "Build with any tool you like.",
+        "Share your build and get featured."
+      ];
+
+      const el = document.getElementById('tw-text');
+      let current = 0;
+      let charIndex = 0;
+      let isDeleting = false;
+
+      function tick() {
+        const text = sentences[current];
+
+        if (!isDeleting) {
+          el.textContent = text.slice(0, charIndex + 1);
+          charIndex++;
+          if (charIndex === text.length) {
+            isDeleting = true;
+            setTimeout(tick, 1800);
+            return;
+          }
+        } else {
+          el.textContent = text.slice(0, charIndex - 1);
+          charIndex--;
+          if (charIndex === 0) {
+            isDeleting = false;
+            current = (current + 1) % sentences.length;
+            setTimeout(tick, 300);
+            return;
+          }
+        }
+
+        setTimeout(tick, isDeleting ? 25 : 45);
+      }
+
+      tick();
+    }());
   </script>
 </body>
 </html>
