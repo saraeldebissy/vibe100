@@ -23,51 +23,56 @@
       padding: 0;
     }
 
+    [hidden] { display: none !important; }
+
     html, body {
       height: 100%;
     }
 
     body {
       background-color: #0a0a0a;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+      background-size: 64px 64px;
       color: #777;
       font-family: 'IBM Plex Mono', monospace;
       -webkit-font-smoothing: antialiased;
-    }
-
-    main {
-      height: 100vh;
       display: flex;
-      flex-direction: column;
-      padding: 32px 5vw;
-    }
-
-    .container {
-      position: relative;
-      width: 100%;
-      max-width: 1000px;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-    }
-
-    .content-mid {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
+      align-items: center;
       justify-content: center;
-      gap: 20px;
+      min-height: 100vh;
+      padding: 4vh 4vw;
     }
 
-    /* Terminal bar */
+    /* ── Terminal window ── */
+    .terminal-window {
+      width: 100%;
+      max-width: 960px;
+      height: 92vh;
+      background: #0f0f0f;
+      border: 1px solid #2a2a2a;
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* ── Title bar ── */
     .term-bar {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 7px;
+      padding: 14px 20px;
+      background: #141414;
+      border-bottom: 1px solid #222;
+      flex-shrink: 0;
     }
 
     .dot {
-      width: 10px;
-      height: 10px;
+      width: 12px;
+      height: 12px;
       border-radius: 50%;
       flex-shrink: 0;
     }
@@ -78,28 +83,53 @@
 
     .term-label {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 11px;
-      color: #444;
-      margin-left: 8px;
-      letter-spacing: 0.05em;
+      font-size: 13px;
+      color: #555;
+      margin-left: 10px;
+      letter-spacing: 0.04em;
     }
 
-    /* Badge */
+    /* ── Window body ── */
+    .window-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 48px 56px 32px;
+      overflow: hidden;
+    }
+
+    /* ── Middle content ── */
+    .content-mid {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      gap: 24px;
+    }
+
+    /* ── Badge ── */
     .badge {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 0.18em;
+      font-size: 12px;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: #C4773A;
-      border: 1px solid rgba(196, 119, 58, 0.27);
+      color: #F0935A;
+      border: 1px solid rgba(240, 147, 90, 0.5);
       border-radius: 4px;
-      padding: 4px 10px;
-      display: inline-block;
+      padding: 5px 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      align-self: center;
     }
 
+
+    /* ── Hero title ── */
     .hero-title {
       font-family: 'Syne', sans-serif;
-      font-size: clamp(72px, 14vw, 160px);
+      font-size: clamp(72px, 11vw, 148px);
       font-weight: 800;
       line-height: 1;
       letter-spacing: -4px;
@@ -108,17 +138,16 @@
       animation: glitch-main 4s infinite;
     }
 
-    .hero-title .vibe { color: #ffffff; }
-    .hero-title .hundred { color: #C4773A; }
+    .hero-title .vibe   { color: #ffffff; }
+    .hero-title .hundred { color: #F0935A; }
 
     .hero-title::before,
     .hero-title::after {
       content: 'vibe100';
       position: absolute;
-      top: 0;
-      left: 0;
+      top: 0; left: 0;
       font-family: 'Syne', sans-serif;
-      font-size: clamp(72px, 14vw, 160px);
+      font-size: clamp(72px, 11vw, 148px);
       font-weight: 800;
       letter-spacing: -4px;
       line-height: 1;
@@ -147,46 +176,47 @@
     @keyframes glitch-r {
       0%, 88%, 100% { opacity: 0; }
       89%, 93%      { opacity: 1; transform: translateX(-4px); }
-      91%           { transform: translateX(4px); }
+      91%            { transform: translateX(4px); }
     }
 
     @keyframes glitch-c {
       0%, 88%, 100% { opacity: 0; }
       89%, 93%      { opacity: 1; transform: translateX(4px); }
-      91%           { transform: translateX(-4px); }
+      91%            { transform: translateX(-4px); }
     }
 
+    /* ── Subtext ── */
     .subtext {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 14px;
+      font-size: 16px;
       color: #777;
       line-height: 1.7;
-      max-width: 560px;
+      text-align: center;
     }
 
-    .accent { color: #C4773A; }
+    .accent { color: #F0935A; }
 
+    /* ── Typewriter ── */
     .typewriter-row {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 13px;
+      font-size: 15px;
       color: #555;
       display: flex;
       align-items: center;
-      gap: 8px;
-      min-height: 20px;
+      gap: 10px;
+      min-height: 24px;
     }
 
-    .tw-arrow { color: #C4773A; flex-shrink: 0; }
-
-    .tw-text { color: #aaa; }
+    .tw-arrow { color: #F0935A; flex-shrink: 0; font-weight: 700; font-size: 20px; position: relative; top: -1px; }
+    .tw-text  { color: #aaa; }
 
     .tw-cursor {
       display: inline-block;
-      width: 0;
-      height: 14px;
-      border-right: 2px solid #aaa;
+      width: 10px;
+      height: 17px;
+      background: #F0935A;
       vertical-align: middle;
-      margin-left: 1px;
+      margin-left: 2px;
       animation: cursor-blink 1s step-end infinite;
     }
 
@@ -195,113 +225,153 @@
       50%       { opacity: 0; }
     }
 
+    /* ── Form ── */
     .form-wrap {
       display: flex;
       flex-direction: column;
-      gap: 0;
-      max-width: 560px;
+      max-width: 680px;
+      width: 100%;
     }
 
     .email-form {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 10px;
     }
 
-    .input-row {
-      display: flex;
-    }
+    .input-row { display: flex; }
 
     .email-input {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 13px;
-      background: #111;
-      border: 1px solid #333;
+      font-size: 15px;
+      background: #0a0a0a;
+      border: 1px solid #2a2a2a;
       border-right: none;
       border-radius: 6px 0 0 6px;
-      color: #ccc;
-      padding: 13px 16px;
+      color: #bbb;
+      padding: 14px 18px;
       flex: 1;
       outline: none;
       transition: border-color 0.15s;
     }
 
     .email-input::placeholder { color: #444; }
-
-    .email-input:focus { border-color: #C4773A; }
+    .email-input:focus        { border-color: #F0935A; }
 
     .submit-btn {
       font-family: 'Syne', sans-serif;
-      font-size: 13px;
+      font-size: 15px;
       font-weight: 700;
-      letter-spacing: 0.06em;
-      background: #C4773A;
+      letter-spacing: 0.05em;
+      background: #F0935A;
       color: #0a0a0a;
       border: none;
       border-radius: 0 6px 6px 0;
-      padding: 13px 22px;
+      padding: 14px 26px;
       cursor: pointer;
       white-space: nowrap;
       transition: background 0.15s;
     }
 
-    .submit-btn:hover { background: #d4843f; }
+    .submit-btn:hover    { background: #e08560; }
     .submit-btn:disabled { background: #7a4a23; cursor: not-allowed; }
 
     .fine-print {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 10px;
+      font-size: 12px;
       color: #444;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.03em;
     }
 
     .form-error {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 11px;
+      font-size: 13px;
       color: #ff6b6b;
-      min-height: 16px;
+      min-height: 18px;
     }
 
     .success-msg {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 13px;
-      color: #C4773A;
-      border: 1px solid rgba(196, 119, 58, 0.2);
-      background: rgba(196, 119, 58, 0.04);
+      font-size: 15px;
+      color: #F0935A;
+      border: 1px solid rgba(217, 119, 87, 0.2);
+      background: rgba(217, 119, 87, 0.04);
       border-radius: 6px;
-      padding: 13px 16px;
+      padding: 14px 18px;
       letter-spacing: 0.02em;
     }
 
-    .stats-row {
+    /* ── Footer / social ── */
+    .social-row {
       display: flex;
-      gap: 32px;
-      padding-top: 20px;
-      border-top: 1px solid #1a1a1a;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 24px;
+      border-top: 1px solid #1e1e1e;
+      flex-shrink: 0;
     }
 
-    .stat {
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-    }
-
-    .stat-num {
+    .footer-logo {
       font-family: 'Syne', sans-serif;
-      font-size: 22px;
+      font-size: 18px;
       font-weight: 800;
-      color: #fff;
+      letter-spacing: -0.5px;
       line-height: 1;
+      text-decoration: none;
+    }
+    .footer-logo .v { color: #fff; }
+    .footer-logo .h { color: #F0935A; }
+
+    .social-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
     }
 
-    .stat-label {
+    .follow-label {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 10px;
+      font-size: 12px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: #555;
+      color: #444;
     }
 
+    .social-link {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      color: #888;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .social-link:hover { color: #F0935A; }
+
+    .social-link svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+
+    /* ── Page load animations ── */
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .terminal-window { animation: fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; }
+    .badge           { animation: fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.25s both; }
+    .hero-title      { animation: fade-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.4s both; }
+    .subtext         { animation: fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.55s both; }
+    .typewriter-row  { animation: fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.65s both; }
+    .form-wrap       { animation: fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.75s both; }
+    .social-row      { animation: fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.9s both; }
+
+    /* ── Scanlines ── */
     .scanlines {
       position: fixed;
       inset: 0;
@@ -313,72 +383,91 @@
         rgba(0, 0, 0, 0.06) 4px
       );
       pointer-events: none;
-      z-index: 10;
+      z-index: 100;
     }
 
-    @media (max-width: 480px) {
-      main {
-        padding: 24px 6vw;
-      }
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      body { padding: 3vh 3vw; }
+
+      .terminal-window { height: auto; min-height: 94vh; border-radius: 10px; }
+
+      .window-body { padding: 28px 24px 24px; }
+
+      .content-mid { gap: 18px; }
 
       .hero-title {
-        font-size: clamp(56px, 18vw, 80px);
+        font-size: clamp(40px, 12vw, 64px);
         letter-spacing: -2px;
       }
 
       .hero-title::before,
       .hero-title::after {
-        font-size: clamp(56px, 18vw, 80px);
+        font-size: clamp(40px, 12vw, 64px);
         letter-spacing: -2px;
       }
 
-      .submit-btn {
-        padding: 13px 14px;
-        font-size: 12px;
+      .subtext      { font-size: 14px; }
+      .typewriter-row { font-size: 13px; }
+
+      /* Stack form vertically on small screens */
+      .input-row { flex-direction: column; }
+
+      .email-input {
+        font-size: 14px;
+        border-right: 1px solid #2a2a2a;
+        border-bottom: none;
+        border-radius: 6px 6px 0 0;
       }
 
-      .stats-row {
-        gap: 20px;
+      .email-input:focus { border-color: #F0935A; }
+
+      .submit-btn {
+        font-size: 14px;
+        padding: 14px 16px;
+        border-radius: 0 0 6px 6px;
+        width: 100%;
       }
+
+      .follow-label { display: none; }
     }
   </style>
 </head>
 <body>
-  <main>
-    <div class="container">
-      <!-- Terminal bar -->
-      <div class="term-bar">
-        <span class="dot dot-r"></span>
-        <span class="dot dot-y"></span>
-        <span class="dot dot-g"></span>
-        <span class="term-label">vibe100.co — session active</span>
-      </div>
+
+  <div class="terminal-window">
+
+    <!-- Title bar -->
+    <div class="term-bar">
+      <span class="dot dot-r"></span>
+      <span class="dot dot-y"></span>
+      <span class="dot dot-g"></span>
+      <span class="term-label">vibe100 — daily-prompt.txt</span>
+    </div>
+
+    <!-- Window body -->
+    <div class="window-body">
 
       <!-- Middle content -->
       <div class="content-mid">
 
-        <!-- Badge -->
         <div class="badge">// 100-day AI building challenge</div>
 
-        <!-- Hero title -->
         <h1 class="hero-title">
           <span class="vibe">vibe</span><span class="hundred">100</span>
         </h1>
 
-        <!-- Subtext -->
         <p class="subtext">
           A daily building challenge.
           <span class="accent">100 prompts, 100 builds,</span>
           shipped publicly.
         </p>
 
-        <!-- Typewriter row -->
         <div class="typewriter-row">
           <span class="tw-arrow">›</span>
           <span class="tw-text" id="tw-text"></span><span class="tw-cursor"></span>
         </div>
 
-        <!-- Email form -->
         <div class="form-wrap" id="form-wrap">
           <form class="email-form" id="email-form" novalidate>
             <div class="input-row">
@@ -390,7 +479,7 @@
                 required
                 autocomplete="email"
               />
-              <button type="submit" class="submit-btn" id="submit-btn">Join Vibe100</button>
+              <button type="submit" class="submit-btn" id="submit-btn">Count me in</button>
             </div>
             <p class="fine-print">No spam. No data sharing. Just build prompts.</p>
             <p class="form-error" id="form-error" aria-live="polite"></p>
@@ -403,26 +492,32 @@
 
       </div><!-- /content-mid -->
 
-      <!-- Stats row -->
-      <div class="stats-row">
-        <div class="stat">
-          <span class="stat-num">100</span>
-          <span class="stat-label">days</span>
-        </div>
-        <div class="stat">
-          <span class="stat-num">1/day</span>
-          <span class="stat-label">build</span>
-        </div>
-        <div class="stat">
-          <span class="stat-num">∞</span>
-          <span class="stat-label">shipped</span>
+      <!-- Footer -->
+      <div class="social-row">
+        <span class="footer-logo"><span class="v">vibe</span><span class="h">100</span></span>
+        <div class="social-right">
+          <span class="follow-label">follow along</span>
+          <a class="social-link" href="https://twitter.com/vibe100build" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+            vibe100build
+          </a>
+          <a class="social-link" href="https://linkedin.com/company/vibe100" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+            vibe100
+          </a>
         </div>
       </div>
-    </div>
 
-    <!-- Scanline overlay -->
-    <div class="scanlines" aria-hidden="true"></div>
-  </main>
+    </div><!-- /window-body -->
+  </div><!-- /terminal-window -->
+
+  <!-- Scanline overlay -->
+  <div class="scanlines" aria-hidden="true"></div>
+
   <script>
     (function () {
       const sentences = [
@@ -487,7 +582,7 @@
         }
 
         btn.disabled = true;
-        btn.textContent = 'Joining...';
+        btn.textContent = 'Counting...';
 
         try {
           const res = await fetch(KIT_ENDPOINT, {
@@ -503,7 +598,7 @@
         } catch (err) {
           errorEl.textContent = 'Something went wrong. Please try again.';
           btn.disabled = false;
-          btn.textContent = 'Join Vibe100';
+          btn.textContent = 'Count me in';
         }
       });
     }());
