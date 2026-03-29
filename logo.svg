@@ -1,0 +1,46 @@
+<svg viewBox="0 0 160 40" xmlns="http://www.w3.org/2000/svg" aria-label="vibe100">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Syne:wght@800&display=swap');
+
+      .l-main { animation: l-main 4s infinite; }
+      .l-r    { opacity: 0; animation: l-r 4s infinite; }
+      .l-c    { opacity: 0; animation: l-c 4s infinite; }
+
+      @keyframes l-main {
+        0%, 88%, 100% { transform: translateX(0); }
+        90%           { transform: translateX(-3px); }
+        92%           { transform: translateX(3px); }
+        94%           { transform: translateX(-1px); }
+        96%           { transform: translateX(0); }
+      }
+      @keyframes l-r {
+        0%, 88%, 100% { opacity: 0; }
+        89%, 93%      { opacity: 1; transform: translateX(-4px); }
+        91%           { transform: translateX(4px); }
+      }
+      @keyframes l-c {
+        0%, 88%, 100% { opacity: 0; }
+        89%, 93%      { opacity: 1; transform: translateX(4px); }
+        91%           { transform: translateX(-4px); }
+      }
+    </style>
+    <clipPath id="lclip-r">
+      <rect x="-8" y="7" width="176" height="7"/>
+    </clipPath>
+    <clipPath id="lclip-c">
+      <rect x="-8" y="22" width="176" height="6"/>
+    </clipPath>
+  </defs>
+
+  <!-- Main text -->
+  <text class="l-main" font-family="'Syne', sans-serif" font-size="36" font-weight="800" letter-spacing="-1" y="34">
+    <tspan fill="#ffffff">vibe</tspan><tspan fill="#F0935A">100</tspan>
+  </text>
+
+  <!-- Red glitch layer -->
+  <text class="l-r" font-family="'Syne', sans-serif" font-size="36" font-weight="800" letter-spacing="-1" y="34" fill="#ff0055" clip-path="url(#lclip-r)">vibe100</text>
+
+  <!-- Cyan glitch layer -->
+  <text class="l-c" font-family="'Syne', sans-serif" font-size="36" font-weight="800" letter-spacing="-1" y="34" fill="#00e5ff" clip-path="url(#lclip-c)">vibe100</text>
+</svg>
